@@ -171,6 +171,7 @@ This portion of code converts the data collected yesterday by sar on the swap us
 ```
 
 [![ldavg-linechart.png](https://i.postimg.cc/k5WjvZNG/ldavg-linechart.png)](https://postimg.cc/Z9KFTwMz)
+
 This portion of code converts the data collected yesterday by sar on the load average of a linux host into the line chart above.
 ```yaml
 ---
