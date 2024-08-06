@@ -115,41 +115,61 @@ You can also install the libraries via <b>.whl</b> files
 
 * Some theoretical examples can be found in [EXAMPLES.md] file
 
-#### Generate this line chart day_performance_linechart.png in /tmp/chart_collection:
-[![day-performance-linechart.png](https://i.postimg.cc/QdsFk71m/day-performance-linechart.png)](https://postimg.cc/4mL4Xm8H)
+* Below are two more practical examples of how to transform data into charts.
+
+[![swap-barchart.png](https://i.postimg.cc/Hxf05NQk/swap-barchart.png)](https://postimg.cc/ftf0QB2G)
+This portion of code converts the data collected yesterday by sar on the swap usage of a linux host into the bar graph below.
 ```yaml
 ---
-  - name: set line axis data
+  vars:
+    LCTIME: "LC_TIME=en_UK.utf8"
+    DAY: "yesterday"
+
+  tasks:
+  - name: Create directory on localhost
+    become: false
+    ansible.builtin.file:
+      path: /tmp/chart_collection
+      state: directory
+    register: dircreated
+    delegate_to: localhost
+
+  - name: collect swap sar output
+    shell: "{{LCTIME}} sar -f /var/log/sa/sa$(date +%d -d '{{DAY}}') -S | egrep -v 'Linux|RESTART|%|Average|^$' | awk '{print $1,$4,$6}'"
+    register: sarcmd
+
+  - name: set bar axis data
     set_fact:
-      xdata: ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00']
-      y1data: [20,20,30,40,50,80,70,60,40,30,20,10]
-      y2data: [05,15,25,20,45,50,40,35,30,20,15,05]
-  
-  - name: run line chart
+      xdata: "{{ xdata|default([]) + [item.split(' ')[0]] }}"
+      y1data: "{{ y1data|default([]) + [item.split(' ')[1] | float]}}"
+      y2data: "{{ y2data|default([]) + [item.split(' ')[2] | float]}}"
+    with_items:
+      - "{{ sarcmd.stdout_lines}}"
+
+  - name: run bar chart
     become: false
     write_charts:
-      titlechart: "Day Performance"
-      type: line
+      titlechart: "Swap Summary"
+      type: bar
       xaxis: '{{xdata}}'
-      xaxisname: "Date time"
+      xaxisname: Time
       yaxis: 
       - '{{y1data}}'
       - '{{y2data}}'
       yaxisname: 
-      - "%cpu"
-      - "%memory"
+      - "%swpused"
+      - "%swpcad"
       yaxiscolor:
       - "#1500ff"
       - "#ff00b7"
-      titlelegend: "Line Legend"
-      shape_line: "spline"
       imgwidth: 1920
       imgheight: 1080
       format: png
       path: /tmp/chart_collection
-      filename: "day_performance_linechart"
+      filename: "swap_barchart"
     delegate_to: localhost
 ```
+
 #### Return :
 
 *  This module return <code>'changed': True</code> when image file is written.
