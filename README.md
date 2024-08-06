@@ -73,7 +73,7 @@ SAMPLE:
 ```
 You can also install the libraries via <b>.whl</b> files
 ```yaml
-  - name: Install plotly python module
+  - name: Install plotly
     become: false
     ansible.builtin.pip:
       name: /tmp/plotly-5.22.0-py3-none-any.whl
