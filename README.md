@@ -158,10 +158,6 @@ You can also install the libraries via <b>.whl</b> files
 |-----------------|---------|-------|
 |changed          |boolean  |True   |                                                                               |
 
-## SANITY TEST
-
-* Ansible sanity test is available in [SANITY.md] file
-
 ## Integration
 
 1. Assuming you are in the root folder of your ansible project.
@@ -206,4 +202,3 @@ $ cp path/to/module library
 [pip module]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/pip_module.html
 
 [EXAMPLES.md]: EXAMPLES.md
-[SANITY.md]: SANITY.md
