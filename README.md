@@ -112,11 +112,40 @@ You can also install the libraries via <b>.whl</b> files
 |check_mode|full   |Can run in check_mode and return changed status prediction without modifying target.|
 
 #### EXAMPLES :
-
-#### Tasks
+#### Generate this line chart day_performance_linechart.png in /tmp/chart_collection
+[![day-performance-linechart.png](https://i.postimg.cc/QdsFk71m/day-performance-linechart.png)](https://postimg.cc/4mL4Xm8H)
 ```yaml
 ---
+- name: set line axis data
+  set_fact:
+    xdata: ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00']
+    y1data: [20,20,30,40,50,80,70,60,40,30,20,10]
+    y2data: [05,15,25,20,45,50,40,35,30,20,15,05]
 
+- name: run line chart
+  become: false
+  write_charts:
+    titlechart: "Day Performance"
+    type: line
+    xaxis: '{{xdata}}'
+    xaxisname: "Date time"
+    yaxis: 
+    - '{{y1data}}'
+    - '{{y2data}}'
+    yaxisname: 
+    - "%cpu"
+    - "%memory"
+    yaxiscolor:
+    - "#1500ff"
+    - "#ff00b7"
+    titlelegend: "Line Legend"
+    shape_line: "spline"
+    imgwidth: 1920
+    imgheight: 1080
+    format: png
+    path: /tmp/chart_collection
+    filename: "day_performance_linechart"
+  delegate_to: localhost
 ```
 
 #### Returned Facts :
