@@ -80,11 +80,12 @@ options:
             - The X axis data.
         required: false
         type: list
+        elements: str
     xaxisname:
         description:
             - The X axis title name.
         required: false
-        type: string
+        type: str
     yaxis:
         description:
             - The Y axis data.
@@ -95,11 +96,13 @@ options:
             - The Y axis title name.
         required: false
         type: list
+        elements: str
     yaxiscolor:
         description:
             - The Y axis color.
         required: false
         type: list
+        elements: str
     shape_line:
         description:
             - The chart chape line.
@@ -135,11 +138,13 @@ options:
             - The pie/donut chart labels.
         required: false
         type: list
+        elements: str
     slicecolor:
         description:
             - The pie/donut chart color.
         required: false
         type: list
+        elements: str
     sizehole:
         description:
             - The size of the hole in the centre of the donut chart
@@ -162,10 +167,10 @@ EXAMPLES = r'''
     type: line
     xaxis: '{{xdata}}'
     xaxisname: "Date time"
-    yaxis: 
+    yaxis:
     - '{{y1data}}'
     - '{{y2data}}'
-    yaxisname: 
+    yaxisname:
     - "%cpu"
     - "%memory"
     yaxiscolor:
@@ -188,10 +193,10 @@ EXAMPLES = r'''
     type: bar
     xaxis: '{{xdata}}'
     xaxisname: "Date time"
-    yaxis: 
+    yaxis:
     - '{{y1data}}'
     - '{{y2data}}'
-    yaxisname: 
+    yaxisname:
     - "%cpu"
     - "%memory"
     yaxiscolor:
@@ -203,7 +208,7 @@ EXAMPLES = r'''
     path: /tmp/chart_collection
     filename: "day_performance_barchart"
   register: chartbar
-  delegate_to: localhost  
+  delegate_to: localhost
 
 - name: set pie fact
   set_fact:
@@ -225,7 +230,7 @@ EXAMPLES = r'''
     path: /tmp/chart_collection
     filename: "cpu_usage_piechart"
   register: chartpie
-  delegate_to: localhost  
+  delegate_to: localhost
 
 - name: run donut chart
   become: false
@@ -242,15 +247,15 @@ EXAMPLES = r'''
     path: /tmp/chart_collection
     filename: "cpu_usage_donutchart"
   register: chartpie
-  delegate_to: localhost  
+  delegate_to: localhost
 
 '''
 
 RETURN = r'''
 changed:
     description: The change status.
-    type: boolean
-    returned: if image files have been generated 
+    type: bool
+    returned: if image files have been generated
     sample: true
 '''
 
@@ -319,12 +324,12 @@ def run_module():
         imgname = module.params.get('filename')
 
         if charttype == "line":
-            for multidata,multiname,multicolor in zip(ydata, yname, ycolor):
-                fig.add_trace(go.Scatter(x = xdata, y = multidata, name = multiname, line_color = multicolor, line_shape = shape))
+            for multidata, multiname, multicolor in zip(ydata, yname, ycolor):
+                fig.add_trace(go.Scatter(x=xdata, y=multidata, name=multiname, line_color=multicolor, line_shape=shape))
 
         if charttype == "bar":
-            for multidata,multiname,multicolor in zip(ydata, yname, ycolor):
-                fig.add_trace(go.Bar(x = xdata, y = multidata, name = multiname, marker_color = multicolor))
+            for multidata, multiname, multicolor in zip(ydata, yname, ycolor):
+                fig.add_trace(go.Bar(x=xdata, y=multidata, name=multiname, marker_color=multicolor))
 
         if len(yname) > 1:
             fig.update_layout(
@@ -347,7 +352,7 @@ def run_module():
                 height=module.params.get('imgheight'),
                 title=module.params.get('titlechart'),
                 xaxis_title=module.params.get('xaxisname'),
-                yaxis_title=' '.join(map(str,module.params.get('yaxisname'))),
+                yaxis_title=' '.join(map(str, module.params.get('yaxisname'))),
                 legend_title=module.params.get('titlelegend'),
                 font=dict(
                     family="Courier New, monospace",
@@ -371,11 +376,11 @@ def run_module():
         fig = go.Figure()
 
         if charttype == "pie":
-            fig.add_trace(go.Pie(labels = pielabel, values = pievalue, marker=dict(colors=piecolor)))
+            fig.add_trace(go.Pie(labels=pielabel, values=pievalue, marker=dict(colors=piecolor)))
 
         if charttype == "donut":
             holesize = module.params.get('sizehole')
-            fig.add_trace(go.Pie(labels = pielabel, values = pievalue, marker=dict(colors=piecolor), hole = holesize))
+            fig.add_trace(go.Pie(labels=pielabel, values=pievalue, marker=dict(colors=piecolor), hole=holesize))
 
         fig.update_layout(
             autosize=False,
