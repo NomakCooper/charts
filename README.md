@@ -118,7 +118,7 @@ You can also install the libraries via <b>.whl</b> files
 * Below are two more practical examples of how to transform data into charts.
 
 [![swap-barchart.png](https://i.postimg.cc/Hxf05NQk/swap-barchart.png)](https://postimg.cc/ftf0QB2G)
-This portion of code converts the data collected yesterday by sar on the swap usage of a linux host into the bar chart above.
+This portion of code converts the data collected yesterday by [sar] on the swap usage of a linux host into the bar chart above.
 ```yaml
 ---
   vars:
@@ -172,7 +172,7 @@ This portion of code converts the data collected yesterday by sar on the swap us
 
 [![ldavg-linechart.png](https://i.postimg.cc/k5WjvZNG/ldavg-linechart.png)](https://postimg.cc/Z9KFTwMz)
 
-This portion of code converts the data collected yesterday by sar on the load average of a linux host into the line chart above.
+This portion of code converts the data collected yesterday by [sar] on the load average of a linux host into the line chart above.
 ```yaml
 ---
   vars:
@@ -280,5 +280,5 @@ $ cp path/to/module library
 [Official link Plotly Python GitHub]: https://github.com/plotly/plotly.py
 
 [pip module]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/pip_module.html
-
+[sar]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/4/html/introduction_to_system_administration/s3-resource-tools-sar-sar#s3-resource-tools-sar-sar
 [EXAMPLES.md]: EXAMPLES.md
