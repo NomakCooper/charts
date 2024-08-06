@@ -124,6 +124,7 @@ This portion of code converts the data collected yesterday by sar on the swap us
   vars:
     LCTIME: "LC_TIME=en_UK.utf8"
     DAY: "yesterday"
+    EGREP: "Linux|RESTART|%|Average|^$"
 
   tasks:
   - name: Create directory on localhost
@@ -135,7 +136,7 @@ This portion of code converts the data collected yesterday by sar on the swap us
     delegate_to: localhost
 
   - name: collect swap sar output
-    shell: "{{LCTIME}} sar -f /var/log/sa/sa$(date +%d -d '{{DAY}}') -S | egrep -v 'Linux|RESTART|%|Average|^$' | awk '{print $1,$4,$6}'"
+    shell: "{{LCTIME}} sar -f /var/log/sa/sa$(date +%d -d '{{DAY}}') -S | egrep -v '{{EGREP}}' | awk '{print $1,$4,$6}'"
     register: sarcmd
 
   - name: set bar axis data
