@@ -14,11 +14,11 @@
 
 ### write_charts ansible custom module
 
-#### Description :
+#### Description : :information_source:
 
 <b>write_charts</b> is a custom module for ansible that generate charts in image format on the ansible control node.
 
-#### Purpose :
+#### Purpose : :eyes:
 
 The purpose of this project is to use ansible's control node to generate charts in image format. To do this, some of the functions of the Python Plotly library are used.<br>
 This module is very basic and uses only a few functions in comparison with the vast number of possibilities offered by the Plotly library.
@@ -40,14 +40,14 @@ In images of these formats:
 *  pdf
 *  eps
 
-#### Repo files:
+#### Repo files: :open_file_folder:
 
 ```
 ├── /library                
 │   └── write_charts.py     ##<-- python custom module
 ```
 
-#### Requirements :
+#### Requirements : :heavy_check_mark:
 
 First of all, in order to use this module you <b>MUST</b> have installed the necessary library on your control node and/or in your environment.<br>
 Precisely this module uses plotly 5.22.0
@@ -63,7 +63,7 @@ Depending on the libraries already present, you may also need:
 You can install these libraries directly from <code>pip</code><br>
 If you have no way of modifying your control node or environment, you can install the libraries by the [pip module] directly via the playbook that will use this module.
 
-SAMPLE:
+SAMPLE: :arrow_forward:
 ```yaml
   - name: Install plotly
     become: false
@@ -80,7 +80,7 @@ You can also install the libraries via <b>.whl</b> files
     delegate_to: localhost
 ```
 
-#### Parameters :
+#### Parameters : :clipboard:
 
 |Parameter|Type  |Required|Sample                      |Comment                                                                                                                 |
 |---------|------|--------|----------------------------|------------------------------------------------------------------------------------------------------------------------|
@@ -105,13 +105,13 @@ You can also install the libraries via <b>.whl</b> files
 |slicecolor|list|pie/donut|["#1500ff","#ff00b7"]|The pie/donut chart color.|
 |sizehole|float|donut|.5|The size of the hole in the centre of the donut chart|
 
-#### Attributes :
+#### Attributes : :clipboard:
 
 |Attribute |Support|Description                                                                         |
 |----------|-------|------------------------------------------------------------------------------------|
 |check_mode|full   |Can run in check_mode and return changed status prediction without modifying target.|
 
-#### EXAMPLES :
+#### EXAMPLES : :bar_chart:
 
 * Some theoretical examples can be found in [EXAMPLES.md] file
 
