@@ -170,6 +170,65 @@ This portion of code converts the data collected yesterday by sar on the swap us
     delegate_to: localhost
 ```
 
+[![ldavg-linechart.png](https://i.postimg.cc/k5WjvZNG/ldavg-linechart.png)](https://postimg.cc/Z9KFTwMz)
+This portion of code converts the data collected yesterday by sar on the load average of a linux host into the line chart above.
+```yaml
+---
+  vars:
+    LCTIME: "LC_TIME=en_UK.utf8"
+    DAY: "yesterday"
+    EGREP: "Linux|RESTART|ldavg|Average|^$"
+
+  tasks:
+  - name: Create directory on localhost
+    become: false
+    ansible.builtin.file:
+      path: /tmp/chart_collection
+      state: directory
+    delegate_to: localhost
+
+  - name: collect ldavg sar output
+    shell: "{{LCTIME}} sar -f /var/log/sa/sa$(date +%d -d '{{DAY}}') -q | egrep -v '{{EGREP}}' | awk '{print $1,$4,$5,$6}'"
+    register: sarcmd
+
+  - name: set line axis data
+    set_fact:
+      xdata: "{{ xdata|default([]) + [item.split(' ')[0]] }}"
+      y1data: "{{ y1data|default([]) + [item.split(' ')[1] | float]}}"
+      y2data: "{{ y2data|default([]) + [item.split(' ')[2] | float]}}"
+      y3data: "{{ y3data|default([]) + [item.split(' ')[3] | float]}}"
+    with_items:
+      - "{{ sarcmd.stdout_lines}}"
+
+  - name: run line chart
+    become: false
+    write_charts:
+      titlechart: "Load Average Summary"
+      type: line
+      xaxis: '{{xdata}}'
+      xaxisname: Time
+      yaxis: 
+      - '{{y1data}}'
+      - '{{y2data}}'
+      - '{{y3data}}'
+      yaxisname: 
+      - "ldavg-1"
+      - "ldavg-5"
+      - "ldavg-15"
+      yaxiscolor:
+      - "#1500ff"
+      - "#ff00b7"
+      - "#f007c9"
+      titlelegend: "ldavg Legend"
+      shape_line: "spline"
+      imgwidth: 1920
+      imgheight: 1080
+      format: png
+      path: /tmp/chart_collection
+      filename: "ldavg_linechart"
+    delegate_to: localhost
+```
+
 #### Return :
 
 *  This module return <code>'changed': True</code> when image file is written.
