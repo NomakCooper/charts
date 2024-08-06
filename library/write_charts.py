@@ -78,7 +78,7 @@ options:
     xaxis:
         description:
             - The X axis data.
-        required: false ( true is chart is line/bar )
+        required: false
         type: list
     xaxisname:
         description:
@@ -88,12 +88,12 @@ options:
     yaxis:
         description:
             - The Y axis data.
-        required: false ( true if chart is line/bar )
+        required: false
         type: list
     yaxisname:
         description:
             - The Y axis title name.
-        required: false ( true if chart is line/bar and has several Y axes )
+        required: false
         type: list
     yaxiscolor:
         description:
@@ -128,22 +128,22 @@ options:
     slicedata:
         description:
             - The pie/donut chart data.
-        required: false ( true is chart is pie/donut )
+        required: false
         type: list
     slicelabel:
         description:
             - The pie/donut chart labels.
-        required: false ( true is chart is pie/donut )
+        required: false
         type: list
     slicecolor:
         description:
             - The pie/donut chart color.
-        required: false ( true is chart is pie/donut )
+        required: false
         type: list
     sizehole:
         description:
             - The size of the hole in the centre of the donut chart
-        required: false ( true is chart is donut )
+        required: false
         type: float
         default: .5
 '''
