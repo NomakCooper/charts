@@ -132,7 +132,6 @@ This portion of code converts the data collected yesterday by sar on the swap us
     ansible.builtin.file:
       path: /tmp/chart_collection
       state: directory
-    register: dircreated
     delegate_to: localhost
 
   - name: collect swap sar output
