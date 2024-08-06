@@ -255,7 +255,6 @@ changed:
 '''
 
 from ansible.module_utils.basic import AnsibleModule
-
 from plotly import graph_objects as go
 
 
