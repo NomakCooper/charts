@@ -197,7 +197,6 @@ EXAMPLES = r'''
     yaxiscolor:
     - "#1500ff"
     - "#ff00b7"
-    titlelegend: "Bar Legend"
     imgwidth: 1920
     imgheight: 1080
     format: png
