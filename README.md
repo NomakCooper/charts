@@ -112,7 +112,7 @@ You can also install the libraries via <b>.whl</b> files
 |check_mode|full   |Can run in check_mode and return changed status prediction without modifying target.|
 
 #### EXAMPLES :
-#### Generate this line chart day_performance_linechart.png in /tmp/chart_collection
+#### Generate this line chart day_performance_linechart.png in /tmp/chart_collection:
 [![day-performance-linechart.png](https://i.postimg.cc/QdsFk71m/day-performance-linechart.png)](https://postimg.cc/4mL4Xm8H)
 ```yaml
 ---
@@ -147,7 +147,77 @@ You can also install the libraries via <b>.whl</b> files
     filename: "day_performance_linechart"
   delegate_to: localhost
 ```
+#### Generate this bar chart day_performance_barchart.png in /tmp/chart_collection with same data:
+[![day-performance-barchart.png](https://i.postimg.cc/L8YHrBL2/day-performance-barchart.png)](https://postimg.cc/21YRWW0K)
+```yaml
+---
+- name: run bar chart
+  become: false
+  write_charts:
+    titlechart: "Day Performance"
+    type: bar
+    xaxis: '{{xdata}}'
+    xaxisname: "Date time"
+    yaxis: 
+    - '{{y1data}}'
+    - '{{y2data}}'
+    yaxisname: 
+    - "%cpu"
+    - "%memory"
+    yaxiscolor:
+    - "#1500ff"
+    - "#ff00b7"
+    imgwidth: 1920
+    imgheight: 1080
+    format: png
+    path: /tmp/chart_collection
+    filename: "day_performance_barchart"
+  delegate_to: localhost 
+```
+#### Generate this pie chart cpu_usage_piechart.png in /tmp/chart_collection:
+[![cpu-usage-piechart.png](https://i.postimg.cc/YSXj7qjw/cpu-usage-piechart.png)](https://postimg.cc/d7yJmF8W)
+```yaml
+---
+- name: set pie fact
+  set_fact:
+    pielabel: ['sys','dba','webservice','application']
+    piedata: [10, 50, 20, 20]
+    piecolor: ["#1500ff", "#ff000d", "#eaff00", "#8700e8"]
 
+- name: run pie chart
+  become: false
+  write_charts:
+    titlechart: "cpu usage"
+    type: pie
+    slicedata: '{{piedata}}'
+    slicelabel: '{{pielabel}}'
+    slicecolor: '{{piecolor}}'
+    imgwidth: 1920
+    imgheight: 1080
+    format: png
+    path: /tmp/chart_collection
+    filename: "cpu_usage_piechart"
+  delegate_to: localhost
+```
+#### Generate this donut chart cpu_usage_donutchart.png in /tmp/chart_collection with same data:
+[![cpu-usage-donutchart.png](https://i.postimg.cc/C5g36bYM/cpu-usage-donutchart.png)](https://postimg.cc/hz2ZXzfN)
+```yaml
+- name: run donut chart
+  become: false
+  write_charts:
+    titlechart: "cpu usage"
+    type: donut
+    slicedata: '{{piedata}}'
+    slicelabel: '{{pielabel}}'
+    slicecolor: '{{piecolor}}'
+    sizehole: .5
+    imgwidth: 1920
+    imgheight: 1080
+    format: png
+    path: /tmp/chart_collection
+    filename: "cpu_usage_donutchart"
+  delegate_to: localhost
+```
 #### Returned Facts :
 
 *  This module return <code>'changed': True</code> when image file is written.
