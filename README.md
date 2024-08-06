@@ -113,7 +113,7 @@ You can also install the libraries via <b>.whl</b> files
 
 #### EXAMPLES :
 
-* Some theoretical examples can be found in the file [EXAMPLES.md]
+* Some theoretical examples can be found in [EXAMPLES.md] file
 
 #### Generate this line chart day_performance_linechart.png in /tmp/chart_collection:
 [![day-performance-linechart.png](https://i.postimg.cc/QdsFk71m/day-performance-linechart.png)](https://postimg.cc/4mL4Xm8H)
