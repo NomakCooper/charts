@@ -118,7 +118,7 @@ You can also install the libraries via <b>.whl</b> files
 * Below are two more practical examples of how to transform data into charts.
 
 [![swap-barchart.png](https://i.postimg.cc/Hxf05NQk/swap-barchart.png)](https://postimg.cc/ftf0QB2G)
-This portion of code converts the data collected yesterday by sar on the swap usage of a linux host into the bar graph below.
+This portion of code converts the data collected yesterday by sar on the swap usage of a linux host into the bar chart above.
 ```yaml
 ---
   vars:
