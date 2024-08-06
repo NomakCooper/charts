@@ -117,7 +117,7 @@ You can also install the libraries via <b>.whl</b> files
 
 * Below are two more practical examples of how to transform data into charts.
 
-[![swap-barchart.png](https://i.postimg.cc/Hxf05NQk/swap-barchart.png)](https://postimg.cc/ftf0QB2G)
+![swap-chart][swap-file]
 This portion of code converts the data collected yesterday by [sar] on the swap usage of a linux host into the bar chart above.
 ```yaml
 ---
@@ -170,7 +170,7 @@ This portion of code converts the data collected yesterday by [sar] on the swap 
     delegate_to: localhost
 ```
 
-[![ldavg-linechart.png](https://i.postimg.cc/k5WjvZNG/ldavg-linechart.png)](https://postimg.cc/Z9KFTwMz)
+![ldavg-chart][ldavg-file]
 
 This portion of code converts the data collected yesterday by [sar] on the load average of a linux host into the line chart above.
 ```yaml
@@ -232,7 +232,7 @@ This portion of code converts the data collected yesterday by [sar] on the load 
 
 #### Return :
 
-*  This module return <code>'changed': True</code> when image file is written.
+*  This module return <code>'changed': True</code>
 
 |Key              |Type     |Sample |
 |-----------------|---------|-------|
@@ -281,4 +281,8 @@ $ cp path/to/module library
 
 [pip module]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/pip_module.html
 [sar]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/4/html/introduction_to_system_administration/s3-resource-tools-sar-sar#s3-resource-tools-sar-sar
+
+[ldavg-file]: ldavg_linechart.png
+[swap-file]: swap_barchart.png
+
 [EXAMPLES.md]: EXAMPLES.md
