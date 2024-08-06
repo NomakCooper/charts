@@ -122,7 +122,7 @@ options:
         default: "#000000"
     titlelegend:
         description:
-            - The title legend.
+            - The legend title.
         required: false
         type: str
     slicedata:
