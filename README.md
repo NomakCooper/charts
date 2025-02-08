@@ -51,7 +51,6 @@ In images of these formats:
 #### Requirements : :heavy_check_mark:
 
 First of all, in order to use this module you <b>MUST</b> have installed the necessary library on your control node and/or in your environment.<br>
-Precisely this module uses plotly 5.22.0
 
 Python lib:
 *  Plotly
@@ -109,8 +108,6 @@ You can also install the libraries via <b>.whl</b> files
 |check_mode|full   |Can run in check_mode and return changed status prediction without modifying target.|
 
 #### EXAMPLES : :bar_chart:
-
-* Below are two more practical examples of how to transform data into charts.
 
 ![line-chart][cpu-file]
 This portion of code converts the load average data collected by sar using my other module sar_facts.
