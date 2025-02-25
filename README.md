@@ -12,6 +12,11 @@
 
 </div>
 
+---
+
+> [!warning]
+> **This repository has been archived. The module is available via Ansible galaxy collection [nomakcooper.collection](https://galaxy.ansible.com/ui/repo/published/nomakcooper/collection/).**
+---
 ### charts ansible custom module
 
 #### Description : :information_source:
